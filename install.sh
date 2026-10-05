@@ -30,7 +30,7 @@ done
 SRC=""
 if [ -n "${BASH_SOURCE[0]:-}" ] && [ -f "${BASH_SOURCE[0]}" ]; then
   here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-  [ -f "$here/${SKILLS[0]}/SKILL.md" ] && SRC="$here"
+  [ -f "$here/skills/${SKILLS[0]}/SKILL.md" ] && SRC="$here/skills"
 fi
 if [ -z "$SRC" ]; then
   command -v curl >/dev/null || { echo "curl é necessário." >&2; exit 1; }
@@ -39,7 +39,7 @@ if [ -z "$SRC" ]; then
   trap 'rm -rf "$TMP"' EXIT
   echo "Baixando $REPO@$BRANCH..."
   curl -fsSL "https://github.com/$REPO/archive/refs/heads/$BRANCH.tar.gz" | tar -xz -C "$TMP" --strip-components=1
-  SRC="$TMP"
+  SRC="$TMP/skills"
 fi
 
 mkdir -p "$DEST"

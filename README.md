@@ -8,11 +8,11 @@ Nada é fixo por repositório: owner, Project, colunas de Status e branch base s
 
 | Skill | Comando | O que faz |
 |-------|---------|-----------|
-| [`issue-new`](issue-new/SKILL.md) | `/issue-new` | Cria a issue (título Conventional Commits, tarefas, critérios de aceite), adiciona ao Project e define o Status inicial. Pede confirmação antes de criar. |
-| [`issue-work`](issue-work/SKILL.md) | `/issue-work <n>` | Move a issue para *In progress*, divide em tarefas, implementa e testa. Para para revisão; **nunca commita**. |
-| [`issue-work-multi`](issue-work-multi/SKILL.md) | `/issue-work-multi <n1> <n2> ...` | Trabalha em várias issues em paralelo (subagents + worktrees isoladas) e faz revisão cruzada para achar conflitos. **Nunca commita**. |
-| [`issue-ship`](issue-ship/SKILL.md) | `/issue-ship <n>` | Após sua aprovação: commita, fecha a issue, move para *Done* e abre o PR via `create-pr`. |
-| [`create-pr`](create-pr/SKILL.md) | `/create-pr` | Abre o PR da branch atual (já commitada) com título Conventional Commits, labels existentes e você como assignee. **Nunca faz merge**. |
+| [`issue-new`](skills/issue-new/SKILL.md) | `/issue-new` | Cria a issue (título Conventional Commits, tarefas, critérios de aceite), adiciona ao Project e define o Status inicial. Pede confirmação antes de criar. |
+| [`issue-work`](skills/issue-work/SKILL.md) | `/issue-work <n>` | Move a issue para *In progress*, divide em tarefas, implementa e testa. Para para revisão; **nunca commita**. |
+| [`issue-work-multi`](skills/issue-work-multi/SKILL.md) | `/issue-work-multi <n1> <n2> ...` | Trabalha em várias issues em paralelo (subagents + worktrees isoladas) e faz revisão cruzada para achar conflitos. **Nunca commita**. |
+| [`issue-ship`](skills/issue-ship/SKILL.md) | `/issue-ship <n>` | Após sua aprovação: commita, fecha a issue, move para *Done* e abre o PR via `create-pr`. |
+| [`create-pr`](skills/create-pr/SKILL.md) | `/create-pr` | Abre o PR da branch atual (já commitada) com título Conventional Commits, labels existentes e você como assignee. **Nunca faz merge**. |
 
 Fluxo:
 
