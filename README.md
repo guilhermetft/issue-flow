@@ -1,0 +1,75 @@
+# Claude Code Skills — workflow GitHub Issue → PR
+
+Skills para o [Claude Code](https://claude.com/claude-code) que automatizam o ciclo
+**ideia → issue → implementação → commit → PR** usando a CLI `gh`.
+Nada é fixo por repositório: owner, Project, colunas de Status e branch base são detectados em runtime.
+
+## Skills
+
+| Skill | Comando | O que faz |
+|-------|---------|-----------|
+| [`issue-new`](issue-new/SKILL.md) | `/issue-new` | Cria a issue (título Conventional Commits, tarefas, critérios de aceite), adiciona ao Project e define o Status inicial. Pede confirmação antes de criar. |
+| [`issue-work`](issue-work/SKILL.md) | `/issue-work <n>` | Move a issue para *In progress*, divide em tarefas, implementa e testa. Para para revisão; **nunca commita**. |
+| [`issue-work-multi`](issue-work-multi/SKILL.md) | `/issue-work-multi <n1> <n2> ...` | Trabalha em várias issues em paralelo (subagents + worktrees isoladas) e faz revisão cruzada para achar conflitos. **Nunca commita**. |
+| [`issue-ship`](issue-ship/SKILL.md) | `/issue-ship <n>` | Após sua aprovação: commita, fecha a issue, move para *Done* e abre o PR via `create-pr`. |
+| [`create-pr`](create-pr/SKILL.md) | `/create-pr` | Abre o PR da branch atual (já commitada) com título Conventional Commits, labels existentes e você como assignee. **Nunca faz merge**. |
+
+Fluxo:
+
+```
+/issue-new  →  /issue-work <n>  →  (você revisa)  →  /issue-ship <n>  →  (você faz o merge)
+```
+
+## Requisitos
+
+- [Claude Code](https://claude.com/claude-code)
+- [GitHub CLI](https://cli.github.com/) autenticado, com escopo de Projects:
+  ```bash
+  gh auth login
+  gh auth refresh -s project
+  ```
+- Repositório git com remote no GitHub
+
+## Instalação
+
+Clone o repositório e copie as pastas das skills para o diretório de skills do Claude Code.
+
+**Global (todos os projetos):**
+
+```bash
+git clone https://github.com/<seu-usuario>/<este-repo>.git
+cp -r <este-repo>/{create-pr,issue-new,issue-work,issue-work-multi,issue-ship} ~/.claude/skills/
+```
+
+**Só em um projeto:** copie para `<projeto>/.claude/skills/`.
+
+No Windows (PowerShell):
+
+```powershell
+Copy-Item -Recurse create-pr,issue-new,issue-work,issue-work-multi,issue-ship "$env:USERPROFILE\.claude\skills\"
+```
+
+Reinicie o Claude Code e use `/issue-new`, etc.
+
+> `issue-ship` chama `create-pr`, e `issue-work-multi` segue o `issue-work`: instale o conjunto completo.
+
+## Garantias de segurança
+
+- Nenhuma skill faz merge. O merge é sempre seu.
+- `issue-work` e `issue-work-multi` nunca commitam.
+- `issue-new` e `issue-ship` pedem confirmação/aprovação antes de ações visíveis a outros.
+- Labels nunca são criadas — só as já existentes no repo.
+
+## Personalização
+
+As skills são Markdown puro (`SKILL.md`). Edite livremente, por exemplo:
+
+- idioma e formato das mensagens de commit;
+- nomes de Status (*In progress*, *Done*) — hoje há fallback para equivalentes;
+- regra de autoria: `create-pr`/`issue-ship` proíbem Claude como co-author/assignee; remova essas linhas se quiser o contrário.
+
+As skills estão escritas em português (pt-BR).
+
+## Licença
+
+[MIT](LICENSE)
