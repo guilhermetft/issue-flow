@@ -7,11 +7,11 @@
 #   ./install.sh --force       # sobrescreve sem perguntar
 #
 # Direto do GitHub:
-#   curl -fsSL https://raw.githubusercontent.com/guilhermetft/claude-code-issue-workflow/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/guilhermetft/issue-flow/main/install.sh | bash
 #   curl -fsSL .../install.sh | bash -s -- --project
 set -euo pipefail
 
-REPO="${SKILLS_REPO:-guilhermetft/claude-code-issue-workflow}"
+REPO="${SKILLS_REPO:-guilhermetft/issue-flow}"
 BRANCH="${SKILLS_BRANCH:-main}"
 SKILLS=(create-pr issue-new issue-work issue-work-multi issue-ship)
 

@@ -35,14 +35,14 @@ Fluxo:
 Uma linha, direto do GitHub (global, em `~/.claude/skills`):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/guilhermetft/claude-code-issue-workflow/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/guilhermetft/issue-flow/main/install.sh | bash
 ```
 
 Ou clonando:
 
 ```bash
-git clone https://github.com/guilhermetft/claude-code-issue-workflow.git
-cd claude-code-issue-workflow
+git clone https://github.com/guilhermetft/issue-flow.git
+cd issue-flow
 ./install.sh              # global (~/.claude/skills)
 ./install.sh --project    # só no projeto atual (./.claude/skills)
 ./install.sh --force      # sobrescreve sem perguntar
