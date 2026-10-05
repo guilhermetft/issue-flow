@@ -1,5 +1,7 @@
 ---
 name: create-pr
+version: 1.0.0
+author: guilhermetft
 description: Abre PR no GitHub via gh CLI a partir da branch atual já commitada. Usa Conventional Commits no título, corpo curto, labels existentes, assignee = usuário autenticado. Nunca commita código, nunca faz merge, nunca adiciona Claude como co-author/assignee. Trigger — "cria PR", "abre PR", "create PR", "open pull request", "fazer PR dessa branch".
 ---
 
@@ -60,7 +62,7 @@ Repo precisa ter remote GitHub configurado (`git remote -v`).
    Tipo escolhido pelo conteúdo real do diff, não pelo nome da branch.
 
 7. **Corpo — só resumo**
-   2-4 linhas ou bullets curtos descrevendo o que mudou. **Sem** "Test plan", **sem** checklist, **sem** seções extras, **sem** "Generated with Claude Code", **sem** "Co-Authored-By: Claude" — Claude nunca aparece no PR de forma alguma (nem assignee, nem contribuidor, nem menção).
+   Segue o modelo em `templates/pr-body.md` (na pasta desta skill): 2-4 linhas ou bullets curtos descrevendo o que mudou. Se o arquivo não existir, usa esse mesmo formato. **Sem** "Test plan", **sem** checklist, **sem** seções extras, **sem** "Generated with Claude Code", **sem** "Co-Authored-By: Claude" — Claude nunca aparece no PR de forma alguma (nem assignee, nem contribuidor, nem menção).
 
 8. **Labels**
    ```bash

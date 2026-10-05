@@ -1,5 +1,7 @@
 ---
 name: issue-work
+version: 1.0.0
+author: guilhermetft
 description: Move a Issue pra "In progress" no Project, analisa o escopo, divide em tarefas, implementa (com subagents quando houver trabalho independente) e escreve/roda testes. Termina parando pra revisão do usuário — nunca commita. Trigger — "/issue-work <número>", "implementa a issue X", "trabalha na issue X", "bora fazer a issue X".
 ---
 

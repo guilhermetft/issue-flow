@@ -1,5 +1,7 @@
 ---
 name: issue-ship
+version: 1.0.0
+author: guilhermetft
 description: Depois que o usuário aprovou as mudanças de um /issue-work — commita (Conventional Commits), fecha a issue, move Status pra Done no Project (se houver), e abre/atualiza o PR pra branch padrão do repo via skill create-pr. Trigger — "/issue-ship <número>", "pode commitar e fechar a issue X", "manda a issue X".
 ---
 

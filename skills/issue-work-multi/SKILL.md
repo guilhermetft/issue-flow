@@ -1,5 +1,7 @@
 ---
 name: issue-work-multi
+version: 1.0.0
+author: guilhermetft
 description: Roda o /issue-work em 2+ issues em paralelo na mesma sessão, cada uma num subagent com worktree isolada, e depois compara as issues entre si (arquivos, contratos, schema, build/testes integrados) pra achar conflito lógico antes do commit. Nunca commita. Trigger — "/issue-work-multi <n1> <n2> ...", "trabalha nas issues X e Y em paralelo", "faz as issues X e Y ao mesmo tempo".
 ---
 

@@ -1,5 +1,7 @@
 ---
 name: issue-new
+version: 1.0.0
+author: guilhermetft
 description: Cria uma GitHub Issue bem formatada (título, descrição, tarefas, critérios de aceite) a partir de uma feature/ideia, adiciona ao Project do repo (detectado em runtime) e define Status inicial. Trigger — "/issue-new", "cria uma issue", "abre issue pra isso", "registra essa feature".
 ---
 
@@ -18,9 +20,20 @@ Primeira etapa do workflow: transforma uma feature/ideia em uma Issue rastreáve
    ```bash
    gh project list --owner "$OWNER" --format json -q '.projects[] | {number,title,id}'
    ```
+   **Antes de concluir que não há Project, olha o resultado do comando:**
+   - **Erro** (ex: `missing required scopes [read:project]`): não é "sem Project". Avisa o usuário para rodar `gh auth refresh -s project` e para. Não segue como se não houvesse Project.
    - 1 só projeto: usa ele.
    - Vários: mostra títulos, pergunta qual usar.
-   - Nenhum: pergunta se quer criar um Project ou seguir só criando a issue, sem gerenciar Status.
+   - **Lista vazia** (comando ok, nenhum projeto): pergunta ao usuário se quer
+     1. criar um Project agora, ou
+     2. seguir só criando a issue, sem gerenciar Status (pula o passo 6).
+
+     Se aceitar criar (é ação visível a outros colaboradores — só com o "sim" explícito; sugere o nome do repo como título e deixa o usuário trocar):
+     ```bash
+     gh project create --owner "$OWNER" --title "<título>" --format json
+     gh project link <número> --owner "$OWNER" --repo "$REPO"
+     ```
+     O `create` devolve `number` e `id`. Se o `link` falhar, avisa e segue (o Project funciona sem vínculo). Um Project novo já vem com o campo Status (`Todo`, `In Progress`, `Done`): usa `Todo` como Status inicial.
    Guarda `PROJECT_NUMBER` e `PROJECT_ID` (campo `id`) pro resto do fluxo.
 
    Status inicial (equivalente a "Backlog"/"Todo"):
@@ -44,19 +57,7 @@ Primeira etapa do workflow: transforma uma feature/ideia em uma Issue rastreáve
      - `feat` → **Feature**
      - `fix` → **Bug**
      - qualquer outro (`refactor`, `chore`, `docs`, etc.) → **Task**
-   - **Corpo**, neste formato:
-     ```markdown
-     ## Contexto
-     <1-3 frases explicando a motivação/problema>
-
-     ## Tarefas
-     - [ ] ...
-     - [ ] ...
-
-     ## Critérios de aceite
-     - [ ] ...
-     - [ ] ...
-     ```
+   - **Corpo**: segue o modelo em `templates/issue-body.md` (na pasta desta skill). Lê o arquivo e preenche os campos; se o usuário editou o modelo, vale a versão dele. Se o arquivo não existir, usa as seções `Contexto`, `Tarefas` e `Critérios de aceite`.
    - **Labels**: só as que já existem no repo (`gh label list`). Nunca cria label nova. Não força label se nenhuma existente fizer sentido.
 
 4. **Mostrar o rascunho pro usuário e confirmar antes de criar.** Criar issue é uma ação visível a outros colaboradores — não cria sem aprovação explícita, mesmo que a demanda pareça clara.

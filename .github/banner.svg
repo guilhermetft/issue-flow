@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="900" y2="320">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="320" rx="12" fill="url(#bg)"/>
+  <rect x="40" y="40" width="120" height="4" rx="2" fill="url(#accent)"/>
+
+  <text x="40" y="105" font-family="monospace, 'Courier New'" font-size="62" font-weight="bold" fill="#22c55e" letter-spacing="6">ISSUE FLOW</text>
+  <text x="40" y="140" font-family="monospace, 'Courier New'" font-size="20" fill="#38bdf8" letter-spacing="2">IDEA - ISSUE - CODE - PR</text>
+  <text x="40" y="172" font-family="monospace, 'Courier New'" font-size="15" fill="#94a3b8">GitHub issue workflow skills for Claude Code</text>
+
+  <rect x="40" y="195" width="105" height="28" rx="6" fill="#0b1120" stroke="#38bdf8" stroke-width="1"/>
+  <text x="92" y="214" font-family="monospace, 'Courier New'" font-size="12" fill="#22c55e" text-anchor="middle" font-weight="bold">5 Skills</text>
+
+  <rect x="160" y="195" width="135" height="28" rx="6" fill="#0b1120" stroke="#38bdf8" stroke-width="1"/>
+  <text x="227" y="214" font-family="monospace, 'Courier New'" font-size="12" fill="#22c55e" text-anchor="middle" font-weight="bold">Parallel Issues</text>
+
+  <rect x="310" y="195" width="175" height="28" rx="6" fill="#0b1120" stroke="#38bdf8" stroke-width="1"/>
+  <text x="397" y="214" font-family="monospace, 'Courier New'" font-size="12" fill="#22c55e" text-anchor="middle" font-weight="bold">Conventional Commits</text>
+
+  <rect x="500" y="195" width="110" height="28" rx="6" fill="#0b1120" stroke="#38bdf8" stroke-width="1"/>
+  <text x="555" y="214" font-family="monospace, 'Courier New'" font-size="12" fill="#22c55e" text-anchor="middle" font-weight="bold">Never Merges</text>
+
+  <text x="40" y="270" font-family="monospace, 'Courier New'" font-size="14" fill="#64748b">/issue-new  ·  /issue-work  ·  /issue-work-multi  ·  /issue-ship  ·  /create-pr</text>
+</svg>
