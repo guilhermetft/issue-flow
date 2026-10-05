@@ -32,26 +32,36 @@ Fluxo:
 
 ## Instalação
 
-Clone o repositório e copie as pastas das skills para o diretório de skills do Claude Code.
-
-**Global (todos os projetos):**
+Uma linha, direto do GitHub (global, em `~/.claude/skills`):
 
 ```bash
-git clone https://github.com/<seu-usuario>/<este-repo>.git
-cp -r <este-repo>/{create-pr,issue-new,issue-work,issue-work-multi,issue-ship} ~/.claude/skills/
+curl -fsSL https://raw.githubusercontent.com/guilhermetft/claude-code-issue-workflow/main/install.sh | bash
 ```
 
-**Só em um projeto:** copie para `<projeto>/.claude/skills/`.
+Ou clonando:
 
-No Windows (PowerShell):
-
-```powershell
-Copy-Item -Recurse create-pr,issue-new,issue-work,issue-work-multi,issue-ship "$env:USERPROFILE\.claude\skills\"
+```bash
+git clone https://github.com/guilhermetft/claude-code-issue-workflow.git
+cd claude-code-issue-workflow
+./install.sh              # global (~/.claude/skills)
+./install.sh --project    # só no projeto atual (./.claude/skills)
+./install.sh --force      # sobrescreve sem perguntar
 ```
 
 Reinicie o Claude Code e use `/issue-new`, etc.
 
-> `issue-ship` chama `create-pr`, e `issue-work-multi` segue o `issue-work`: instale o conjunto completo.
+> `issue-ship` chama `create-pr`, e `issue-work-multi` segue o `issue-work`: o script instala o conjunto completo.
+> No Windows, rode o script no Git Bash ou WSL.
+
+## Desinstalação
+
+```bash
+./uninstall.sh              # global
+./uninstall.sh --project    # projeto atual
+./uninstall.sh --yes        # sem confirmação
+```
+
+Remove só as 5 skills deste repo; outras skills suas não são tocadas.
 
 ## Garantias de segurança
 
