@@ -53,5 +53,14 @@ Segunda e terceira etapa do workflow: implementação de uma issue já criada.
    - Escreve testes novos quando a issue introduz comportamento não coberto.
    - Se não for possível testar de ponta a ponta (ex: UI sem browser disponível), diz isso explicitamente em vez de assumir sucesso.
 
-6. **Parar para revisão — não commita.**
+6. **Marcar os checkboxes da issue**
+   Edita o corpo da issue no GitHub e troca `- [ ]` por `- [x]` só nos itens (tarefas e critérios de aceite) que foram **de fato feitos e verificados** nesta sessão. O que ficou de fora continua `- [ ]`.
+   ```bash
+   gh issue view <n> --json body -q .body > /tmp/issue-<n>.md   # no Windows, usa o scratchpad da sessão
+   # edita só as linhas dos itens concluídos (ex: sed -i 's/^- \[ \] Texto do item/- [x] Texto do item/')
+   gh issue edit <n> --body-file /tmp/issue-<n>.md
+   ```
+   Nunca marca por suposição, nem em massa: item sem teste ou sem evidência de que funciona não é marcado. Lista no resumo os itens que não marcou e por quê.
+
+7. **Parar para revisão — não commita.**
    Resume o que foi feito, mostra o diff relevante (`git status` / `git diff --stat`) e pede pro usuário revisar. Esse é o fim do `/issue-work`. Quando aprovado, o usuário roda `/issue-ship <n>`.

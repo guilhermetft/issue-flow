@@ -23,7 +23,7 @@ Etapas finais do workflow: commit, fechamento da issue e abertura do PR.
    OWNER=$(gh repo view --json owner -q .owner.login)
    gh project list --owner "$OWNER" --format json -q '.projects[] | {number,title,id}'
    ```
-   1 só projeto: usa ele. Vários: pergunta qual (ou reusa o mesmo do `/issue-work`, se souber). Nenhum: pula passo 4 (mover Status).
+   1 só projeto: usa ele. Vários: pergunta qual (ou reusa o mesmo do `/issue-work`, se souber). Nenhum: pula passo 6 (mover Status).
    Guarda `PROJECT_NUMBER` e `PROJECT_ID`.
 
 2. **Conferir estado**
@@ -39,12 +39,18 @@ Etapas finais do workflow: commit, fechamento da issue e abertura do PR.
    - Stage só os arquivos relevantes (não `git add -A` cego — revisa o que entra).
    - Nunca adiciona Claude como co-author.
 
-4. **Fechar a issue**
+4. **Conferir os checkboxes da issue**
+   ```bash
+   gh issue view <n> --json body -q .body
+   ```
+   Se ainda houver `- [ ]`: para cada item, confere no diff/testes se foi feito. Marca `- [x]` (via `gh issue edit <n> --body-file ...`) só o que está comprovadamente entregue. Item que **não** foi feito não é marcado: avisa o usuário e pergunta se fecha a issue assim mesmo, se o item vira outra issue ou se fica pendente. Nunca marca tudo em massa sem conferir.
+
+5. **Fechar a issue**
    ```bash
    gh issue close <n> --comment "Implementado em <hash do commit>."
    ```
 
-5. **Mover Status → "Done" (ou equivalente)** — pula se não houver Project (passo 1)
+6. **Mover Status → "Done" (ou equivalente)** — pula se não houver Project (passo 1)
    ```bash
    ITEM_ID=$(gh project item-list "$PROJECT_NUMBER" --owner "$OWNER" --format json -q '.items[] | select(.content.number==<n>) | .id')
    FIELD_ID=$(gh project field-list "$PROJECT_NUMBER" --owner "$OWNER" --format json -q '.fields[] | select(.name=="Status") | .id')
@@ -53,7 +59,7 @@ Etapas finais do workflow: commit, fechamento da issue e abertura do PR.
    ```
    Se "Done" não existir no board, usa equivalente ("Completed", "Closed") ou pergunta.
 
-6. **Abrir/atualizar o PR**
+7. **Abrir/atualizar o PR**
    Invoca a skill `create-pr` (via Skill tool) pra abrir ou atualizar o PR da branch atual pra branch padrão do repo. Ela já cuida de: detectar branch base, checar se já existe PR aberto (agrega commits em vez de duplicar), título Conventional Commits, corpo só com resumo, labels existentes, assignee = usuário autenticado, **nunca merge**, **Claude nunca aparece no PR**.
 
-7. **Reportar**: hash do commit, issue fechada, Status atualizado (se houver Project), URL do PR. Fim do workflow — merge é decisão do usuário.
+8. **Reportar**: hash do commit, issue fechada, Status atualizado (se houver Project), URL do PR. Fim do workflow — merge é decisão do usuário.
